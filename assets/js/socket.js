@@ -6,7 +6,7 @@
 //
 // Pass the token on params as below. Or remove it
 // from the params if you are not using authentication.
-import {Socket} from "phoenix"
+import {Presence, Socket} from "phoenix"
 import $ from "jquery"
 
 let socket = new Socket("/socket", {})
@@ -15,6 +15,23 @@ socket.connect()
 
 let chatChannel = socket.channel("chat", {})
 chatChannel.join()
+let presence = new Presence(chatChannel)
+let presences = {};
+
+presence.onSync(() => showOnlineStatus(presence))
+
+function showOnlineStatus(presence) {
+  let chatOnlineList = document.getElementById('chat-online-list')
+  while (chatOnlineList.firstChild) {
+    chatOnlineList.removeChild(chatOnlineList.firstChild);
+  }
+  Presence.list(presences, (name, { metas: [first, ...rest] }) => {
+    let div = document.createElement("div")
+    div.textContent = name
+    div.classList.add("chatter")
+    chatOnlineList.appendChild(div)
+  })
+}
 
 document.getElementById('chat-send-button').addEventListener('click', function (e) {
   e.preventDefault()
@@ -40,6 +57,16 @@ chatChannel.on("new_message", response => {
   div.classList.add("chat-message")
 
   chat.appendChild(div)
+})
+
+chatChannel.on("presence_state", state => {
+  presences = Presence.syncState(presences, state)
+  showOnlineStatus(presences)
+})
+
+chatChannel.on("presence_diff", diff => {
+  presences = Presence.syncDiff(presences, diff)
+  showOnlineStatus(presences)
 })
 
 export default socket
