@@ -1,7 +1,7 @@
 defmodule ChannelLiveViewDemoWeb.PageController do
   use ChannelLiveViewDemoWeb, :controller
 
-  def index(conn, _params) do
-    render(conn, "index.html")
+  def live_view(conn, _params) do
+    render(conn, "live_view.html")
   end
 end

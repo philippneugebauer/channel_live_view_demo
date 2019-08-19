@@ -17,7 +17,7 @@ defmodule ChannelLiveViewDemoWeb.Router do
   scope "/", ChannelLiveViewDemoWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PageController, :live_view
   end
 
   # Other scopes may use custom stacks.
