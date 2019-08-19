@@ -1,0 +1,6 @@
+<div class="form-group row mt-3">
+  <div class="col-md-12">
+    <%= textarea :chat, :message, rows: 2, class: "form-control", id: "chat-message" %>
+  </div>
+</div>
+<%= link gettext("Send Message"), to: "", class: "btn btn-primary", id: "chat-send-button" %>

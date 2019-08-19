@@ -1,0 +1,26 @@
+<div id="user-name-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Chat Username</h5>
+      </div>
+      <div class="modal-body">
+        <input id="user-name-input" type="text" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button id="user-name-set-button" type="button" class="btn btn-primary">Set</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="chat-online-list" class="col-sm-3">
+  </div>
+  <div class="col-sm-9">
+    <div id="chat-text">
+    </div>
+    <hr>
+    <%= render "_form.html" %>
+  </div>
+</div>

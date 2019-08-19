@@ -18,6 +18,7 @@ defmodule ChannelLiveViewDemoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :live_view
+    get "/chat", PageController, :chat
   end
 
   # Other scopes may use custom stacks.
