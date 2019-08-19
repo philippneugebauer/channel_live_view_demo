@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :channel_live_view_demo, ChannelLiveViewDemo.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "ppn",
+  password: "",
   database: "channel_live_view_demo_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
@@ -61,7 +61,8 @@ config :channel_live_view_demo, ChannelLiveViewDemoWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/channel_live_view_demo_web/{live,views}/.*(ex)$",
-      ~r"lib/channel_live_view_demo_web/templates/.*(eex)$"
+      ~r"lib/channel_live_view_demo_web/templates/.*(eex)$",
+      ~r{lib/channel_live_view_demo_web/live/.*(ex)$}
     ]
   ]
 
