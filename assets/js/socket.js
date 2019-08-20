@@ -32,15 +32,17 @@ presence.onSync(() => showOnlineStatus(presence))
 
 chatChannel.join()
 
-document.getElementById('chat-send-button').addEventListener('click', function (e) {
-  e.preventDefault()
+if($('chat-send-button').length) {
+  document.getElementById('chat-send-button').addEventListener('click', function (e) {
+    e.preventDefault()
 
-  let chatMessageInput = document.getElementById('chat-message')
-  let message = chatMessageInput.value
-  chatMessageInput.value = ''
-  let userName = document.getElementById('chat-send-button').getAttribute("user-name")
-  chatChannel.push("new_message", { "sender": userName, "message": message }, socket)
-})
+    let chatMessageInput = document.getElementById('chat-message')
+    let message = chatMessageInput.value
+    chatMessageInput.value = ''
+    let userName = document.getElementById('chat-send-button').getAttribute("user-name")
+    chatChannel.push("new_message", { "sender": userName, "message": message }, socket)
+  })
+}
 
 chatChannel.on("new_message", response => {
   let chat = document.getElementById('chat-text')
