@@ -1,7 +1,7 @@
 defmodule ChannelLiveViewDemoWeb.ChatChannel do
   use ChannelLiveViewDemoWeb, :channel
 
-  alias ChannelLiveViewDemo.Presence
+  alias ChannelLiveViewDemoWeb.Presence
 
   def join("chat", _payload, socket) do
     {:ok, socket}

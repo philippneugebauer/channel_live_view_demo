@@ -14,7 +14,7 @@ defmodule ChannelLiveViewDemo.Application do
       ChannelLiveViewDemoWeb.Endpoint,
       # Starts a worker by calling: ChannelLiveViewDemo.Worker.start_link(arg)
       # {ChannelLiveViewDemo.Worker, arg},
-      ChannelLiveViewDemo.Presence
+      ChannelLiveViewDemoWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
