@@ -1,6 +1,11 @@
 defmodule ChannelLiveViewDemo.SearchLive do
   use Phoenix.LiveView
 
+  import Ecto.Query
+
+  alias ChannelLiveViewDemo.Repo
+  alias ChannelLiveViewDemo.User
+
   def render(assigns) do
     ChannelLiveViewDemo.SearchView.render("search_live.html", assigns)
   end
@@ -10,8 +15,8 @@ defmodule ChannelLiveViewDemo.SearchLive do
   end
 
   def handle_event("suggest", %{"q" => query}, socket) when byte_size(query) <= 100 do
-    {words, _} = System.cmd("grep", ~w"^#{query}.* -m 5 /usr/share/dict/words")
-    {:noreply, assign(socket, matches: String.split(words, "\n"))}
+    matches = Repo.all from u in User, where: ilike(u.name, ^"%#{query}%")
+    {:noreply, assign(socket, matches: Enum.map(matches, fn m -> m.name end))}
   end
 
   def handle_event("search", %{"q" => query}, socket) when byte_size(query) <= 100 do
@@ -20,7 +25,7 @@ defmodule ChannelLiveViewDemo.SearchLive do
   end
 
   def handle_info({:search, query}, socket) do
-    {result, _} = System.cmd("dict", ["#{query}"], stderr_to_stdout: true)
-    {:noreply, assign(socket, loading: false, result: result, matches: [])}
+    result = Repo.one from u in User, where: u.name == ^query
+    {:noreply, assign(socket, loading: false, result: result.name, matches: [])}
   end
 end
