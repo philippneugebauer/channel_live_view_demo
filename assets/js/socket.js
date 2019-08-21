@@ -32,7 +32,7 @@ presence.onSync(() => showOnlineStatus(presence))
 
 chatChannel.join()
 
-if($('chat-send-button').length) {
+if($('#chat-send-button').length) {
   document.getElementById('chat-send-button').addEventListener('click', function (e) {
     e.preventDefault()
 
