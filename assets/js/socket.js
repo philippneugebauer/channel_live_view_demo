@@ -11,14 +11,14 @@ import $ from "jquery"
 
 let socket = new Socket("/socket", {})
 let chatChannel = socket.channel("chat", {})
-let presence = new Presence(chatChannel)
+let presences = {};
 
-function showOnlineStatus(presence) {
+function showOnlineStatus(presences) {
   let chatOnlineList = document.getElementById('chat-online-list')
   while (chatOnlineList.firstChild) {
     chatOnlineList.removeChild(chatOnlineList.firstChild);
   }
-  presence.list((name, { metas: [first, ...rest] }) => {
+  Presence.list(presences, (name, { metas: [first, ...rest] }) => {
     let div = document.createElement("div")
     div.textContent = name
     div.classList.add("chatter")
@@ -27,8 +27,6 @@ function showOnlineStatus(presence) {
 }
 
 socket.connect()
-
-presence.onSync(() => showOnlineStatus(presence))
 
 chatChannel.join()
 
@@ -43,6 +41,11 @@ if($('#chat-send-button').length) {
     chatChannel.push("new_message", { "sender": userName, "message": message }, socket)
   })
 }
+
+chatChannel.on("presence_diff", diff => {
+  presences = Presence.syncDiff(presences, diff)
+  showOnlineStatus(presences)
+})
 
 chatChannel.on("new_message", response => {
   let chat = document.getElementById('chat-text')
