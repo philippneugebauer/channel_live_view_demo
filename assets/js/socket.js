@@ -47,6 +47,11 @@ chatChannel.on("presence_diff", diff => {
   showOnlineStatus(presences)
 })
 
+chatChannel.on("presence_state", state => {
+  presences = Presence.syncState(presences, state)
+  showOnlineStatus(presences)
+})
+
 chatChannel.on("new_message", response => {
   let chat = document.getElementById('chat-text')
 
