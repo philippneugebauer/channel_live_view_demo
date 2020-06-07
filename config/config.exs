@@ -15,7 +15,7 @@ config :channel_live_view_demo, ChannelLiveViewDemoWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "y3KK5g8RnogLh/m7Gs3hw2z7AXryMgYNhuNR+pAMZrOrhCvOBfCCSEXPn/HxjPxv",
   render_errors: [view: ChannelLiveViewDemoWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: ChannelLiveViewDemo.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: ChannelLiveViewDemo.PubSub,
   live_view: [
     signing_salt: "UzW35rmJbC6VxuDkfenyLXxAsZK7TQme"
   ]

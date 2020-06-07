@@ -11,6 +11,7 @@ defmodule ChannelLiveViewDemo.Application do
       # Start the Ecto repository
       ChannelLiveViewDemo.Repo,
       # Start the endpoint when the application starts
+      {Phoenix.PubSub, name: ChannelLiveViewDemoWeb.PubSub},
       ChannelLiveViewDemoWeb.Endpoint,
       # Starts a worker by calling: ChannelLiveViewDemo.Worker.start_link(arg)
       # {ChannelLiveViewDemo.Worker, arg},

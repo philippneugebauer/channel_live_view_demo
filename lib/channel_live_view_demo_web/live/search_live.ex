@@ -10,7 +10,7 @@ defmodule ChannelLiveViewDemo.SearchLive do
     ChannelLiveViewDemo.SearchView.render("search_live.html", assigns)
   end
 
-  def mount(_session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, assign(socket, query: nil, result: nil, loading: false, matches: [])}
   end
 

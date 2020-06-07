@@ -1,11 +1,17 @@
 defmodule ChannelLiveViewDemoWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :channel_live_view_demo
 
+  @session_options [
+    store: :cookie,
+    key: "_channel_live_view_demo_key",
+    signing_salt: "akQxpwEl"
+  ]
+
   socket "/socket", ChannelLiveViewDemoWeb.UserSocket,
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -39,10 +45,7 @@ defmodule ChannelLiveViewDemoWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_channel_live_view_demo_key",
-    signing_salt: "akQxpwEl"
+  plug Plug.Session, @session_options
 
   plug ChannelLiveViewDemoWeb.Router
 end
