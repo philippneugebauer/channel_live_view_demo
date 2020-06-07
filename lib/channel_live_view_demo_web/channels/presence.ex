@@ -69,5 +69,5 @@ defmodule ChannelLiveViewDemoWeb.Presence do
   original presence data.
   """
   use Phoenix.Presence, otp_app: :channel_live_view_demo,
-                        pubsub_server: ChannelLiveViewDemo.PubSub
+                        pubsub_server: ChannelLiveViewDemoWeb.PubSub
 end
